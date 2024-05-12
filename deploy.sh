@@ -17,7 +17,6 @@ elif [[ "$1" == "devmergedmaster" ]]; then
     IMAGE_COUNT="$2"  # Use the count passed as an argument
     docker tag "react:${IMAGE_COUNT}" "${DOCKER_USERNAME}/prod:Latest${IMAGE_COUNT}"
     docker push "${DOCKER_USERNAME}/prod:Latest${IMAGE_COUNT}"
-    docker push "${DOCKER_USERNAME}/dev:Latest${IMAGE_COUNT}"
     export IMAGE_NAME="react:${IMAGE_COUNT}"  # Export before running docker-compose
     docker compose up -d
 else

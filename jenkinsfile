@@ -13,29 +13,38 @@ pipeline {
             steps {
                 script {
                     echo "Branch Name: ${env.BRANCH_NAME}"
-                    if (env.BRANCH_NAME == 'master') {
+                    if (env.BRANCH_NAME == 'dev') {
                         sh 'chmod +x build.sh'
                         def buildOutput = sh(script: './build.sh', returnStdout: true).trim()
                         def imageCount = buildOutput.tokenize(':').last()  // Extract the image count
-                        def login = sh("docker login -u cjayanth -p ")
+                        def login = sh("docker login -u cjayanth -p dckr_pat_b7SY8aUaMHV1wGURqY4jQoukKNI")
                         echo "${login}"
                         echo "Image count: ${imageCount}"
                         sh 'chmod +x deploy.sh'
                         sh "./deploy.sh devchanged ${imageCount}" // Pass only the image count
-                    } else if (env.BRANCH_NAME == 'main') {
-                        def commitId = sh(script: "git log --pretty=%P -n 1 HEAD", returnStdout: true).trim()
-                        def parentCommits = commitId.tokenize(' ')
-                        if (parentCommits.size() > 1) {
-                            def mergedBranch = sh(script: "git branch --contains ${commitId}", returnStdout: true).trim()
-                            echo "Merged branch: ${mergedBranch}"
-                            if (mergedBranch.trim() == '* master') {
-                                echo "Merged from master, executing build and deploy..."
-                                sh 'chmod +x build.sh'
-                                sh './build.sh'
-                                sh 'chmod +x deploy.sh'
-                                sh './deploy.sh'
-                            } else {
-                                echo "Not merged from master, skipping build and deploy."
-
-^G Help         ^O Write Out    ^W Where Is     ^K Cut          ^T Execute      ^C Location     M-U Undo        M-A Set Mark    M-] To Bracket  M-Q Previous    ^B Back
-^X Exit         ^R Read File    ^\ Replace      ^U Pa
+                    } else if (env.BRANCH_NAME == 'master') {
+                        def mergeCommit = sh(script: "git log --merges --first-parent -1 --pretty=format:\"%H\"", returnStdout: true).trim()
+                        def isMerged = sh(script: "git branch --contains ${mergeCommit}", returnStdout: true).trim()
+                        if (isMerged.contains('* dev')) {
+                            echo "Dev branch has been merged to main, executing build and deploy..."
+                            sh 'git checkout dev' // Switch to dev branch
+                            sh 'git pull origin dev' // Pull latest changes from dev branch
+                            sh 'chmod +x build.sh'
+                            def buildOutput = sh(script: './build.sh', returnStdout: true).trim()
+                            def imageCount = buildOutput.tokenize(':').last()  // Extract the image count
+                            def login = sh("docker login -u cjayanth -p dckr_pat_b7SY8aUaMHV1wGURqY4jQoukKNI")
+                            echo "${login}"
+                            echo "Image count: ${imageCount}"
+                            sh 'chmod +x deploy.sh'
+                            sh "./deploy.sh devmergedmain ${imageCount}" // Pass only the image count
+                        } else {
+                            echo "Dev branch has not been merged to main, skipping build and deploy."
+                        }
+                    } else {
+                        echo "Skipping build and deploy for branch: ${env.BRANCH_NAME}"
+                    }
+                }
+            }
+        }
+    }
+}

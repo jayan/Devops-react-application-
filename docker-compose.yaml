@@ -4,4 +4,5 @@ services:
     image: ${IMAGE_NAME}
     ports:
       - "80:80"
-
+    volumes:
+      - /nginx:/etc/nginx

@@ -17,8 +17,6 @@ pipeline {
                         sh 'chmod +x build.sh'
                         def buildOutput = sh(script: './build.sh', returnStdout: true).trim()
                         def imageCount = buildOutput.tokenize(':').last()  // Extract the image count
-                        def login = sh("docker login -u cjayanth -p dckr_pat_b7SY8aUaMHV1wGURqY4jQoukKNI")
-                        echo "${login}"
                         echo "Image count: ${imageCount}"
                         sh 'chmod +x deploy.sh'
                         sh "./deploy.sh devchanged ${imageCount}" // Pass only the image count

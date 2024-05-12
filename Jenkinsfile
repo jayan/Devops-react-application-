@@ -25,7 +25,6 @@ pipeline {
                         def isMerged = sh(script: "git branch --contains ${mergeCommit}", returnStdout: true).trim()
                         if (isMerged.contains('* dev')) {
                             echo "Dev branch has been merged to main, executing build and deploy..."
-                            echo "checking merges"
                             sh 'git checkout dev' // Switch to dev branch
                             sh 'git pull origin dev' // Pull latest changes from dev branch
                             sh 'chmod +x build.sh'

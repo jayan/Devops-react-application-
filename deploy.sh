@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Docker Hub username
+docker login -u cjayanth -p dckr_pat_b7SY8aUaMHV1wGURqY4jQoukKNI
 DOCKER_USERNAME="cjayanth"
 
 # Check the argument passed

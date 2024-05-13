@@ -29,7 +29,7 @@ pipeline {
                             def imageCount = buildOutput.tokenize(':').last()  // Extract the image count
                             echo "Image count: ${imageCount}"
                             sh 'chmod +x deploy.sh'
-                            sh "./deploy.sh devmergedmain ${imageCount}" // Pass only the image count
+                            sh "./deploy.sh devmergedmaster ${imageCount}" // Pass only the image count
                         } else {
                             echo "Dev branch has not been merged to main, skipping build and deploy."
                         }

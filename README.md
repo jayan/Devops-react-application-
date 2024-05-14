@@ -1,4 +1,4 @@
-![photo1715672479 (1)](https://github.com/jayan/final-project/assets/83051900/6f2fe8ea-6af4-492c-b187-52e0cd76ae06)
+
 # React deployment
 
 Project Title: React Deployment Capstone Project

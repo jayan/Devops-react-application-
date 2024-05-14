@@ -21,7 +21,7 @@ Login to server can should be made only from your ip address.
 
 create in terraform file 
 ```bash
-  nano instance
+  nano instance.tf
 ```
 
 

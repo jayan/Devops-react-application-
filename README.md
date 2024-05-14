@@ -110,12 +110,14 @@ login into the created server
 
 ## git clone 
 
-To clone the these 
+To clone the these use 
 ```bash
   git clone https://github.com/sriram-R-krishnan/devops-build
 ```
 Docker:
+
 Dockerize the application by creating a Dockerfile.
+
 Create a docker-compose file to use the above image.
 
 # TO dockerzing the the application 

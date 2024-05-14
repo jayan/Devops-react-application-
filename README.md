@@ -1,4 +1,4 @@
-
+![photo1715672479 (1)](https://github.com/jayan/final-project/assets/83051900/6f2fe8ea-6af4-492c-b187-52e0cd76ae06)
 # React deployment
 
 Project Title: React Deployment Capstone Project
@@ -229,16 +229,29 @@ Note: Use only CLI for related git commands.
 
 # create a repositry on git hub default should be master 
 
+![photo1715672479](https://github.com/jayan/final-project/assets/83051900/f27f6bf3-31a4-4d73-b445-2bb57e9218aa)
+![photo1715672479 (1)](https://github.com/jayan/final-project/assets/83051900/b0be0575-f148-45e3-b51e-7300a9104493)
+![photo1715672479 (2)](https://github.com/jayan/final-project/assets/83051900/35111499-cc44-428c-a62e-f5a58dbb4141)
+![photo1715672479 (3)](https://github.com/jayan/final-project/assets/83051900/de3dedcc-640e-4ebf-9494-e5d39b864d84)
+
+
 clone the repositry using 
 ```bash
   git clone https://github.com/jayan/final-project.git
 ```
+
+![photo1715672660](https://github.com/jayan/final-project/assets/83051900/f45281b3-741b-4f1c-8ddd-3b37fdf75cf2)
+
 copy all files and directories from devops-capstone to cloned repo
 And use git commands to push the code to the git hub 
 now  create a branch called dev  and chekout to dev
 ```bash
   git checkout -b dev
 ```
+![photo1715672788](https://github.com/jayan/final-project/assets/83051900/02cd6262-088d-4bec-a10e-152ef5d1ce51)
+![photo1715672788 (1)](https://github.com/jayan/final-project/assets/83051900/177e7a57-6246-4dd4-b567-40dbbdbc498b)
+![photo1715672788 (2)](https://github.com/jayan/final-project/assets/83051900/900aece4-7360-460b-b001-5e0f7615dbf2)
+
 create .gitignore and .dockerignore file  in case want ignore particular files to prevent the push  to central repo
 and use gitcommands to push all the files directory into a central  dev repo
 ```bash
@@ -249,17 +262,17 @@ and use gitcommands to push all the files directory into a central  dev repo
 
 
 
-
-
-
-
 Docker hub:
 Create 2 repos "dev" and "prod" to push images.
 "Prod" repo must be private and "dev" repo can be public.
 
-#Docker hub:
+#create 2 repos in docker hub 
+go to the dockerhub account and click on create repositry 
+
 Create 2 repos "dev" and "prod" to push images.
+
 "Prod" repo must be private and "dev" repo can be public.
+![photo1715673119](https://github.com/jayan/final-project/assets/83051900/8c0a6bfe-8f7b-47b8-9230-1744d2dff0a3)
 
 
 Jenkins:
@@ -268,8 +281,10 @@ Connect jenkins to the github repo with auto build trigger from both dev & maste
  If code pushed to dev branch, docker image must build and pushed to dev repo in docker hub.
 If dev merged to master, then docker image must be pushed to prod repo in docker hub.
 
+
 #jenkins installation 
 install jenkins on machine by using jenkins.sh file that was uploaded in my repo located in installation directory run the jenkins.sh file directly by using 
+
 ```bash
   bash jenkins.sh
 ```
@@ -279,7 +294,14 @@ install jenkins on machine by using jenkins.sh file that was uploaded in my repo
 ```
 Now try to access the jenkins and login into the jenkins 
 
-#configure the required plugins  according to the requirement
+![photo1715673267](https://github.com/jayan/final-project/assets/83051900/cdbff7b9-e962-4069-b71b-18e2d1490d4c)
+![photo1715673287](https://github.com/jayan/final-project/assets/83051900/f6af2140-71c3-4617-baa3-850a11d6a103)
+![photo1715673287 (1)](https://github.com/jayan/final-project/assets/83051900/23dd821e-8102-4271-ab10-1a79bcaf14dc)
+![photo1715673287 (1)](https://github.com/jayan/final-project/assets/83051900/af92e943-7254-4cd6-9146-7c22bf17cf56)
+
+
+
+#install the  plugins  according to the requirement
 
 create a jenkinsfile  on machine  and define a workflow and push it to the github.
 ```bash
@@ -310,10 +332,7 @@ create a jenkinsfile  on machine  and define a workflow and push it to the githu
                         def isMerged = sh(script: "git branch --contains ${mergeCommit}", returnStdout: true).trim()
                         if (isMerged.contains('* dev')) {
                             echo "Dev branch has been merged to main, executing build and deploy..."
-                            echo "checking merges"
-                            sh 'git checkout dev' // Switch to dev branch
-                            sh 'git pull origin dev' // Pull latest changes from dev branch
-                            sh 'chmod +x build.sh'
+
                             def buildOutput = sh(script: './build.sh', returnStdout: true).trim()
                             def imageCount = buildOutput.tokenize(':').last()  // Extract the image count
                             echo "Image count: ${imageCount}"
@@ -331,29 +350,71 @@ create a jenkinsfile  on machine  and define a workflow and push it to the githu
     }
 }
 ```
-so that we can create a multibranch pipeline to  Connect jenkins to the github repo with auto build trigger from both dev & master branch and If code pushed to dev branch, docker image must build and pushed to dev repo in docker hub.
+now we can create a multibranch pipeline to  Connect jenkins to the github repo with auto build trigger from both dev & master branch 
+
+If code pushed to dev branch, docker image must build and pushed to dev repo in docker hub.
+
 If dev merged to master, then docker image must be pushed to prod repo in docker hub.
+
 Go to jenkins dashboard and creat new job select multibranch pipeline.
+![photo1715673658](https://github.com/jayan/final-project/assets/83051900/56485964-d7d3-4119-ad97-7d1b6d072210)
+![photo1715673658 (1)](https://github.com/jayan/final-project/assets/83051900/5eb2a10b-2553-411c-a83e-4e925da068d8)
+![photo1715673658 (2)](https://github.com/jayan/final-project/assets/83051900/27a442dd-15b0-4274-80e3-62b3d6e161bc)
+![photo1715673658 (9)](https://github.com/jayan/final-project/assets/83051900/3495c31f-7021-4633-84e0-77b2e1f33df5)
+
 Branch source is git and enter git url  and click on add and select filter by name (with wildcards). 
+![photo1715673658 (3)](https://github.com/jayan/final-project/assets/83051900/878293e2-584e-441a-9223-57be3a029b35)
+![photo1715673658 (4)](https://github.com/jayan/final-project/assets/83051900/3c701e21-078d-4e43-8f09-3b4e13e300de)
+photo1715673658 (5)
+
 ```bash
   master* dev*
 ```
 
+![photo1715673658 (6)](https://github.com/jayan/final-project/assets/83051900/a0e39b49-4fbb-4b76-ac04-4c8d54f70121)
+
+And enter the path of the  jenkinsfile from  your github repositry path and select scanwebhook to triiger the build evrytime when ever the change will happaned in github repo 
  In scan multibranch pipeline triggers select scan by webhook and enter 
 ```bash
   cloud
 ```
- Go to git hub repo in settings choose webhook option and create webhook 
+![photo1715673658 (8)](https://github.com/jayan/final-project/assets/83051900/47a05de2-2289-40ab-b398-1906b5f817dc)
+
+
+create a webhook in a GitHub repository, go to the repository's settings, navigate to the "Webhooks" section, click "Add webhook," provide the jenkinsurl and configure other settings as needed, then click "Add webhook" to save.
+
+![photo1715674221](https://github.com/jayan/final-project/assets/83051900/3962016e-b328-452a-9012-a8122c344a83)
+
+![photo1715674221 (1)](https://github.com/jayan/final-project/assets/83051900/fa890790-1dff-4f15-9673-a177aa22538e)
+
  
  Playload URL*
  ```bash
   http://3.109.56.73:8080/multibranch-webhook-trigger/invoke?token=cloud
 ```
+![photo1715674221 (1)](https://github.com/jayan/final-project/assets/83051900/ded79055-06a6-4287-9a1e-0e5b00f5b4df)
 
-select push event and create 
-after created the webhook. go to jenkins and  click on save and apply and it will connect jenkins to github repo with auto trigger from both dev and master branch If code pushed to dev branch, docker image must build and pushed to dev repo in docker hub 
+![photo1715674221 (3)](https://github.com/jayan/final-project/assets/83051900/79714999-ef3f-45a3-bb0a-afb9f5430bb2)
+
+
+
+after created the webhook. go to jenkins and  click on save and apply
+
+![photo1715674628](https://github.com/jayan/final-project/assets/83051900/d8bafe00-cdee-4dc2-a9ec-c48c0738412f)
+
+
+now it will  auto trigger from both dev and master branch If code pushed to dev branch, docker image must build and pushed to dev repo in docker hub 
 here you can see below image  the dev branch  get started building and deploy it into the docker hub into dev branch
 
+![photo1715675091](https://github.com/jayan/final-project/assets/83051900/2a6699ee-2fe3-40a4-ab78-3c751eccfc0b)
+here is the console output 
+![photo1715675122 (1)](https://github.com/jayan/final-project/assets/83051900/dc1e19ed-fb38-4404-a42b-fefbf7a160c5)
+
+![photo1715675122](https://github.com/jayan/final-project/assets/83051900/01fb949d-baae-485f-abcb-d2965d9fd4e7)
+now go to the docker hub and check weather image was uploaded or not 
+![photo1715675190 (1)](https://github.com/jayan/final-project/assets/83051900/54c77b9b-1645-433a-b7d3-7cd9dc5a629b)
+here is the image that was uploaded. every time it get start building  the  image will be created with the name of react each time it build image the name will be change it starts increase the count  like react1 react2 react3.  and the tag name should also change Latest1 Latest2
+![photo1715675190](https://github.com/jayan/final-project/assets/83051900/5eae483c-c4a7-4be2-82bc-153ca00e503b)
 
 
 if dev merged to master than the image will get pushed  to prod in docker hub 

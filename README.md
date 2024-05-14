@@ -75,7 +75,7 @@ resource "aws_instance" "jenkins_instance" {
 
 ```
 
-And intialize, pla, and apply
+And intialize, plan, and apply
 ```bash
   terraform init
   terraform plan

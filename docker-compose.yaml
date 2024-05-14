@@ -1,7 +1,8 @@
-version: '3'
+version: '3.9'
 services:
   app:
     image: ${IMAGE_NAME}
     ports:
       - "80:80"
-
+    volumes:
+      - /nginx:/etc/nginx

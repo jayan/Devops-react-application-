@@ -154,7 +154,9 @@ services:
 
 Bash Scripting:
 Write 2 scripts
+
 build.sh for building docker images.
+
 deploy.sh for deploying the image to server.
 
 # write a bash  scripting 

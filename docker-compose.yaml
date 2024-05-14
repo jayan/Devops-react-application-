@@ -1,8 +1,7 @@
 version: '3.9'
 services:
   app:
-    image: ${IMAGE_NAME}
+    image: ${IMAGE_NAME} #used environmental variable from deploy.sh
     ports:
       - "80:80"
-    volumes:
-      - /nginx:/etc/nginx
+      - "8081:8081" #for matric

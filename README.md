@@ -418,13 +418,20 @@ here is the image that was uploaded. every time it get start building  the  imag
 
 
 if dev merged to master than the image will get pushed  to prod in docker hub 
-
+![photo1715676945](https://github.com/jayan/final-project/assets/83051900/122a0615-5547-42eb-af8b-430d1389c1f6)
+![photo1715676945 (1)](https://github.com/jayan/final-project/assets/83051900/4dc40d46-a801-49fb-8a03-72233d9130cb)
+here if dev merged to master than it will start  trigger automatically and make it run build.sh and and deploy.sh and d will finally push it into the docker hub pro repo 
+![photo1715676787](https://github.com/jayan/final-project/assets/83051900/1060fe9d-8b7c-4d33-b233-f5245139c092)
+![photo1715676458 (1)](https://github.com/jayan/final-project/assets/83051900/057bf8c8-1c97-49d7-8ee3-f25df2927b87)
+![photo1715676458 (2)](https://github.com/jayan/final-project/assets/83051900/f9bcb237-5af7-40fc-b567-26bc3bfa99f7)
+latest7 was a tag name and image name will be react7
+![photo1715676586](https://github.com/jayan/final-project/assets/83051900/6d0eb4e9-c86d-46c7-aa3b-51c5c98de4ae)
 
 
 
 Monitoring:
 setup a monitoring system to check the health status of the application (open-source)
-sending notification sending the notifications only if application goes down is highly appreciable.
+ sending the notifications only if application goes down is highly appreciable.
 
 
 #To monitoring my application 
@@ -448,8 +455,8 @@ EXPOSE 80
 # Expose port 8080 for your metrics
 EXPOSE 8081
 ```
-
-Install Nginx Prometheus Exporter¶
+and upload it  into the github repo
+#Install Nginx Prometheus Exporter
  fetch all the available metrics for now. We'll use the Nginx prometheus exporter to do that. It's a Golang application that compiles to a single binary without external dependencies, which is very easy to install.
 
 First of all, let's create a folder for the exporter and switch directory.
@@ -493,7 +500,7 @@ It's optional; let's update the ownership on the exporter folder.
 chown -R nginx-exporter:nginx-exporter /opt/nginx-exporter
 ```
 ```bash
-vim /etc/systemd/system/nginx-exporter.service
+nano /etc/systemd/system/nginx-exporter.service
 ```
 Make sure you update the scrape-uri to the one you used in Nginx to expose basic metrics. Also, update the Linux user and the group to match yours in case you used different names.
 ```bash
@@ -535,6 +542,9 @@ Check the status of the service.
 systemctl status nginx-exporter
 ```
 
+![photo1715677567](https://github.com/jayan/final-project/assets/83051900/25f779d3-fb98-43b1-892c-914eaee3b133)
+access it by using <ip>:9113
+
 And install a  Node Exporter  used for monitoring and collecting metrics from Linux system 
 
 ```bash
@@ -575,6 +585,8 @@ Check the status of the service.
 systemctl status node_exporter
 ```
 
+![photo1715677519](https://github.com/jayan/final-project/assets/83051900/374049bb-b3a2-44df-bb3f-ffd98548cf82)
+access it by using <ip>:9100
 
 
 #setup a monitoring system 
@@ -583,7 +595,9 @@ these is my terraform script to create an instance
  ```bash
   terraform script 
 ```
-Install Prometheus¶
+connect to the prometheus instance 
+
+#Install Prometheus¶
 Now let's quickly install the latest version of prometheus on the same host.
 
 Create a dedicated Linux user for Prometehus to scrap matric from the deployed application.
@@ -649,6 +663,9 @@ systemctl restart prometheus
 ```
 
 Now you can go to http://<ip>:9090/ to check if the prometheus is working.
+![photo1715677801](https://github.com/jayan/final-project/assets/83051900/de128436-67c2-44c8-8227-8bc149d9a3b1)
+
+
 
 Under the targets section, you should have a single nginx-prometheus-exporter target.
 
@@ -672,15 +689,127 @@ systemctl status grafana-server
 ```
 
 Now you can access Grafana on port http://<ip>:3000. The username is admin, and the password is admin as well.
+![photo1715677861](https://github.com/jayan/final-project/assets/83051900/cb6f2ad5-f9ab-4830-aeb6-ce46e5b74e1d)
 
 First of all, let's add our Prometheus as a datasource.
 For the URL, use http://localhost:9090 and click save and test.
+![photo1715678044](https://github.com/jayan/final-project/assets/83051900/f38cf6d5-9522-4bff-ae19-e688b82e68ee)
+
+![photo1715678044 (1)](https://github.com/jayan/final-project/assets/83051900/46da17cd-9cfd-4f71-8b80-f5bd9cd8d1a4)
+![photo1715678044 (2)](https://github.com/jayan/final-project/assets/83051900/3070169d-207f-4664-9f8f-a8ad0e893b1a)
+add prometheus server url 
+![photo1715678261](https://github.com/jayan/final-project/assets/83051900/79174895-0109-489f-8b0f-a863bd9e540a)
+
+![photo1715678044 (4)](https://github.com/jayan/final-project/assets/83051900/57c478c4-9233-4fb4-bced-43ae3c64a295)
+
 Let's create a two  dashboards 
 one is for application monitoring call it as nginx and another is for my machine monitoring call it as node exporter
-Create a new Panel.
-For the metrics use nginx_connections_active.
-For the legend {{ instance }}.
-Title: Active Connections.
-I'm going to fill out the rest of the panels using the metrics that we retried from the status page. You can find this dashboard in my github repository.
+![photo1715678370](https://github.com/jayan/final-project/assets/83051900/2b704ec6-9f2e-499c-ad62-3df45ef0c929)
+
+
+I'm going to fill out the panels using the metrics that we retried from the status page. You can find this dashboard in my github repository.
+
+these my nginx dashbord that monitors my application
+![photo1715678699](https://github.com/jayan/final-project/assets/83051900/53f27058-a8f4-4c3c-9972-9b59bb4673bf)
+
+these will monitor weather my application was up and running  if in these dashbord nginx_up = 0 it means the application is down and if it shows nginx_up = 1 it means application is up and running 
+![photo1715678699 (1)](https://github.com/jayan/final-project/assets/83051900/15765b1b-034b-42a6-9c20-28013df60e63)
+
+these is my  node dashboard that monitor my instance 
+![photo1715678699 (2)](https://github.com/jayan/final-project/assets/83051900/66b134d6-c44e-4424-b263-870ba82efeed)
+
+#To send notification if my application goes down 
+
+go to the alert rules click on create alertrule and follow the below image
+
+![photo1715679395](https://github.com/jayan/final-project/assets/83051900/dddc2dac-dfe3-4096-975c-14d979c948c0)
+
+![photo1715679395 (1)](https://github.com/jayan/final-project/assets/83051900/9a24dac2-61d2-44db-a289-d8dd1c39f45e)
+
+here i written a condition that the given  posql query if the  value below 1 it will get a alert 
+![photo1715679395 (2)](https://github.com/jayan/final-project/assets/83051900/fd3db020-a765-4dfc-9a59-ee66da943a7c)
+![photo1715679395 (3)](https://github.com/jayan/final-project/assets/83051900/0bee192e-e5f0-4800-b626-e325c282a117)
+
+And click on save it
+
+
+![photo1715679631](https://github.com/jayan/final-project/assets/83051900/442590fb-4a5f-4870-882c-8c606e911313)
+
+After these go to the contact poit and click on add contact point. and configure the email id and save it 
+![photo1715679793](https://github.com/jayan/final-project/assets/83051900/3e4bbbb4-c09c-4bc3-953e-e88ab3bb1b60)
+
+
+![photo1715679793 (1)](https://github.com/jayan/final-project/assets/83051900/3da8ee7c-559f-49f2-82e4-56bcf33c3cf2)
+
+
+And go to the /etc/grafana/grafana.ini and configure these 
+```bash
+[smtp]
+enabled = true
+host = your_smtp_server_address
+port = 587
+user = your_smtp_username
+password = your_smtp_password
+```
+and navigate to the contact point which you have create and click on start test notification to check weather its workking or not if you get mail it means its working
+
+![photo1715680083](https://github.com/jayan/final-project/assets/83051900/0f4fa298-4d90-4432-a4ad-7a582f6eb76e)
+
+![photo1715680083 (1)](https://github.com/jayan/final-project/assets/83051900/0c7d90c3-cd2e-4e34-bd76-93046f32fb8b)
+
+
+go to the notification policies and create new policy to make a  connetion with alret rule and  contact point 
+
+
+now here you see my application was up and running 
+
+![photo1715680485](https://github.com/jayan/final-project/assets/83051900/223a5a4d-8656-4d82-ae4b-875d4accfb77)
+
+if i go to my deployementent machine and stop the application i will get a nofification that my server was down 
+
+![photo1715680485 (1)](https://github.com/jayan/final-project/assets/83051900/b09bb862-5f4f-4fc6-9ff3-019ea74eef67)
+
+
+![photo1715680485 (2)](https://github.com/jayan/final-project/assets/83051900/4d2cb01c-7d0a-4315-9bf8-7fe9f8f871ce)
+
+![photo1715680485 (3)](https://github.com/jayan/final-project/assets/83051900/ab0ff993-aca7-48af-a084-92db74b95266)
+
+
+![photo1715680485 (4)](https://github.com/jayan/final-project/assets/83051900/6a81957b-b3fb-4b6f-a4ef-4ac637b9e6ac)
+
+here i get the notification that my server was down
+
+![photo1715680485 (5)](https://github.com/jayan/final-project/assets/83051900/c7527221-545a-45d5-a052-b77b82a3d7a1)
+
+![photo1715680485 (6)](https://github.com/jayan/final-project/assets/83051900/7c01fca6-3e50-4eb8-b0ed-34679d790aa9)
+
+
+
+
+#my deployed site URL
+
+link:- http://3.7.66.132/
+
+![photo1715680898](https://github.com/jayan/final-project/assets/83051900/204155d6-1c08-4558-b178-a64c824524ac)
+
+![photo1715680898 (1)](https://github.com/jayan/final-project/assets/83051900/33accfb2-8b7d-4c06-b0a5-137514fe0364)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

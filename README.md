@@ -94,14 +94,24 @@ And intialize, plan, and apply
 (or) 
 Create Security Group:
 Go to the AWS Management Console and navigate to the EC2 service.
+
 In the left navigation pane, under "Network & Security", select "Security Groups".
 Click on the "Create security group" button.
+![photo1715597391 (6)](https://github.com/jayan/final-project/assets/83051900/63a9306b-9cdc-4385-a8c8-8acac70fd89e)
 Provide a name, description, and configure the inbound rule first inbound rule port no should be 80 and make it access any one.
+![photo1715597391 (7)](https://github.com/jayan/final-project/assets/83051900/7560c3b5-7eb7-4d41-be2c-c9697ef82df1)
+
 And second inbound rule is to choose port 22 and login acces through our ip address 
 enter our ip address/32.
+![photo1715597391 (7)](https://github.com/jayan/final-project/assets/83051900/1395e341-c5d8-4e4c-821c-a40f76f87ded)
+
 Click on the "Create security group" button to create the security group.
+![photo1715597391 (9)](https://github.com/jayan/final-project/assets/83051900/8e3bb43b-fbe8-4dfb-9ea9-937ce62dcd5f)
+
 And go to  EC2 dashboard, click on the "Launch Instance" button.
 Choose an Amazon Machine Image (AMI), instance type, configure instance details, add storage configure security groups (select the one you just created), add tags, and configure any additional options as needed.
+![photo1715597391 (10)](https://github.com/jayan/final-project/assets/83051900/9292d124-f5fc-4114-b9ef-1dcfbd44dce1)
+
 Review your configuration and click on the "Launch" button.
 Select an existing key pair or create a new one.
 Finally, click on the "Launch Instances" button to launch your instance.
